@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class NotebooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_notebook, only: %i[show edit update destroy]
 
   # GET /notebooks
   # GET /notebooks.json
   def index
-    @notebooks = Notebook.all
+    @notebooks = current_user.notebooks
   end
 
   # GET /notebooks/1
@@ -24,7 +25,7 @@ class NotebooksController < ApplicationController
   # POST /notebooks
   # POST /notebooks.json
   def create
-    @notebook = Notebook.new(notebook_params)
+    @notebook = current_user.notebooks.build(notebook_params)
 
     respond_to do |format|
       if @notebook.save
@@ -65,11 +66,11 @@ class NotebooksController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_notebook
-    @notebook = Notebook.find(params[:id])
+    @notebook = current_user.notebooks.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
   def notebook_params
-    params.require(:notebook).permit(:title, :user_id)
+    params.require(:notebook).permit(:title)
   end
 end
