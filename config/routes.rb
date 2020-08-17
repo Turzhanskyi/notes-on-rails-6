@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :notebooks
+  resources :notebooks do
+    resources :pages
+  end
 
   devise_for :users
   root to: 'home#index'
