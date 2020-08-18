@@ -14,6 +14,27 @@ import "bootstrap";
 import "../stylesheets/application";
 import "@fortawesome/fontawesome-free/js/all";
 
+document.addEventListener('turbolinks:load', () => {
+    document.addEventListener('click', () => {
+        let element = event.target.closest('.text-content')
+        if (!element) return;
+
+        element.classList.add('d-none')
+        element.nextElementSibling.classList.remove('d-none')
+    })
+
+    document.addEventListener('click', () => {
+        if (!event.target.matches('.cancel')) return;
+
+        event.preventDefault();
+
+        let element = event.target.closest('.form-content')
+
+        element.classList.add('d-none')
+        element.previousElementSibling.classList.remove('d-none')
+    })
+})
+
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
 // or the `imagePath` JavaScript helper below.
