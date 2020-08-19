@@ -5,11 +5,14 @@
   </div>
 
   <div>
-    <%= form_with(model: [@notebook, @page, @paragraph]) do |form| %>
+    <%= form_with(model: [@notebook, @page, @paragraph], html: { class: 'float-left mr-1'}) do |form| %>
       <%= form.submit 'Add Paragraph', class: 'btn btn-primary' %>
     <% end %>
-    <%= form_with(model: [@notebook, @page, @image_element]) do |form| %>
+    <%= form_with(model: [@notebook, @page, @image_element], html: { class: 'float-left mr-1'}) do |form| %>
       <%= form.submit 'Add Image', class: 'btn btn-primary' %>
+    <% end %>
+    <%= form_with(model: [@notebook, @page, @checklist], html: { class: 'float-left mr-1'}) do |form| %>
+      <%= form.submit 'Add Checklist', class: 'btn btn-primary' %>
     <% end %>
   </div>
 </h3>
@@ -52,5 +55,23 @@
         <% end %>
       <% end %>
     </div>
+  <% end %>
+
+  <% @page.checklists.each do |checklist| %>
+    <% if checklist.persisted? %>
+      <div class="text-content p-4 mb-2">
+        <h4><%= checklist.title %></h4>
+      </div>
+      <div class="form-content p-4 mb-2">
+        <%= form_with(model: [@notebook, @page, checklist]) do |form| %>
+          <label>checklist title</label>
+          <%= form.text_field :title, class: 'form-control' %>
+          <div class="buttons mt-3">
+            <%= form.submit 'Save', class: 'btn btn-primary' %>
+            <a href="#" class="cancel btn btn-light">Cancel</a>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </div>
