@@ -9,6 +9,7 @@ class PagesController < ApplicationController
   def show
     add_breadcrumb(@page.title)
     @paragraph = @page.paragraphs.build
+    @image_element = @page.image_elements.build
   end
 
   # GET /pages/new
