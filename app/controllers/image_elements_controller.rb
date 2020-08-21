@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ImageElementsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     notebook = current_user.notebooks.find(params[:notebook_id])
     page = notebook.pages.find(params[:page_id])

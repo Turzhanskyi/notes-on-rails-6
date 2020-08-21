@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ChecklistsController < ApplicationController
+  before_action :authenticate_user!
+
   before_action :set_checklist, only: %i[show edit update destroy]
 
   # GET /checklists
