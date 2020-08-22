@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class PagesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_notebook
   before_action :set_page, only: %i[show edit update destroy]
   before_action :set_base_breadcrumbs, only: %i[show new edit]
@@ -10,6 +11,7 @@ class PagesController < ApplicationController
     add_breadcrumb(@page.title)
     @paragraph = @page.paragraphs.build
     @image_element = @page.image_elements.build
+    @checklist = @page.checklists.build
   end
 
   # GET /pages/new
