@@ -88,6 +88,19 @@
           <% end %>
         </div>
         <div class="checklist-items mt-3">
+          <div class="progress mb-3">
+            <% percent_complete = checklist.percent_complete %>
+            <% percent_in_progress = checklist.percent_in_progress %>
+
+            <div class="progress-bar bg-dark" role="progressbar"
+                 style="width: <%= percent_complete %>%"
+                 aria-valuenow="<%= percent_complete %>"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar bg-primary" role="progressbar"
+                 style="width: <%= percent_in_progress %>%"
+                 aria-valuenow="<%= percent_in_progress %>"
+                 aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
           <ul class="list-group">
             <% checklist.checklist_items.each do |checklist_item| %>
               <% if checklist_item.persisted? %>

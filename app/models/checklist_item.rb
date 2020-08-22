@@ -17,9 +17,9 @@ class ChecklistItem < ApplicationRecord
     when 'not-started'
       'secondary'
     when 'in-progress'
-      'info'
+      'primary'
     when 'complete'
-      'success'
+      'dark'
     end
   end
 
@@ -32,5 +32,13 @@ class ChecklistItem < ApplicationRecord
     when 'complete'
       'Complete'
     end
+  end
+
+  def complete?
+    status == 'complete'
+  end
+
+  def in_progress?
+    status == 'in-progress'
   end
 end
